@@ -1,13 +1,10 @@
 <template>
   <div class="home">
     <div class="restaurant-card">
-      <img
-        src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/8/31/fa2b070a-7908-4ac7-b66f-f63633284c0d_951058.jpg"
-        alt="restaurant-image"
-      />
-      <h5>Burger King</h5>
-      <h6>Ratings: 3.5 ⭐</h6>
-      <h6>Cuisines: North Indian, South Indian</h6>
+      <img :src="restaurant.imageUrl" alt="restaurant-image" />
+      <h5>{{ restaurant.name }}</h5>
+      <h6>Ratings {{ restaurant.ratings }} ⭐</h6>
+      <h6>{{ restaurant.cuisines }}</h6>
     </div>
   </div>
 </template>
@@ -15,6 +12,26 @@
 <script>
 export default {
   name: "Home",
+  data() {
+    return {
+      restaurant: {
+        name: "Burger King",
+        ratings: "3.5",
+        cuisines: "North Indian, South Indian",
+        imageUrl:
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/8/31/fa2b070a-7908-4ac7-b66f-f63633284c0d_951058.jpg",
+      },
+    };
+  },
+  // created: {
+  //   restaurant: {
+  //     name: "Burger King",
+  //     ratings: "3.5",
+  //     cuisines: "North Indian, South Indian",
+  //     imageUrl:
+  //       "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/8/31/fa2b070a-7908-4ac7-b66f-f63633284c0d_951058.jpg",
+  //   },
+  // },
 };
 </script>
 
