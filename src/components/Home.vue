@@ -1,17 +1,19 @@
 <template>
   <div class="home">
-    <div class="restaurant-card">
-      <img :src="restaurant.imageUrl" alt="restaurant-image" />
-      <h5>{{ restaurant.name }}</h5>
-      <h6>Ratings {{ restaurant.ratings }} ⭐</h6>
-      <h6>{{ restaurant.cuisines }}</h6>
+    <div class="restaurant-list">
+      <RestaurantCard :restaurant="restaurant" />
     </div>
   </div>
 </template>
 
 <script>
+import RestaurantCard from "./RestaurantCard.vue";
+
 export default {
   name: "Home",
+  components: {
+    RestaurantCard,
+  },
   data() {
     return {
       restaurant: {
