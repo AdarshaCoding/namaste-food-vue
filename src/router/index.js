@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import SearchPage from "@/views/SearchPage.vue";
 import Home from "@/components/Home.vue";
 import CartPage from "@/views/CartPage.vue";
+import RestaurantMenu from "@/components/RestaurantMenu.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: CartPage,
+  },
+  {
+    path: "/restaurant/:resId",
+    name: "restaurant",
+    component: RestaurantMenu,
   },
 ];
 

@@ -1,7 +1,14 @@
 <template>
   <div class="home">
     <div class="restaurant-list">
-      <RestaurantCard :restaurant="restaurant" />
+      <router-link
+        v-for="restaurant in restaurants"
+        :key="restaurant?.info?.id"
+        class="res-list"
+        :to="'/restaurant/' + restaurant?.info?.id"
+      >
+        <RestaurantCard :restaurant="restaurant?.info" />
+      </router-link>
     </div>
   </div>
 </template>
@@ -16,48 +23,41 @@ export default {
   },
   data() {
     return {
-      restaurant: {
-        name: "Burger King",
-        ratings: "3.5",
-        cuisines: "North Indian, South Indian",
-        imageUrl:
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/8/31/fa2b070a-7908-4ac7-b66f-f63633284c0d_951058.jpg",
-      },
+      restaurants: null,
     };
   },
-  // created: {
-  //   restaurant: {
-  //     name: "Burger King",
-  //     ratings: "3.5",
-  //     cuisines: "North Indian, South Indian",
-  //     imageUrl:
-  //       "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/8/31/fa2b070a-7908-4ac7-b66f-f63633284c0d_951058.jpg",
-  //   },
-  // },
+
+  created() {
+    console.log("Home: Created");
+    const fetchRestaurants = async () => {
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9418968&lng=77.5239628&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
+      const json = await data.json();
+      // console.log(
+      //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      //     ?.restaurants
+      // );
+      this.restaurants =
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      console.log(this.restaurants);
+    };
+    fetchRestaurants();
+  },
 };
 </script>
 
 <style scoped lang="scss">
 .home {
-  margin: 15px 0px;
-  .restaurant-card {
-    // border: 1px solid black;
-    width: 270px;
-    height: 290px;
-    border-radius: 10px;
-    line-height: 20px;
-    img {
-      width: 100%;
-      height: 60%;
-      border-radius: 10px;
-    }
-    h1 {
-      font-size: 15px;
-    }
-    &:hover {
-      padding: 5px;
-      cursor: pointer;
-    }
+  margin: auto;
+  width: 80%;
+  .restaurant-list,
+  .res-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    text-decoration: none;
+    color: #282c3f;
   }
 }
 </style>
