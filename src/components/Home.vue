@@ -1,29 +1,36 @@
 <template>
-  <div class="home">
-    <div class="restaurant-list">
-      <router-link
-        v-for="restaurant in restaurants"
-        :key="restaurant?.info?.id"
-        class="res-list"
-        :to="'/restaurant/' + restaurant?.info?.id"
-      >
-        <RestaurantCard :restaurant="restaurant?.info" />
-      </router-link>
+  <div>
+    <div v-if="restaurants?.length === 0">
+      <Shimmer />
+    </div>
+    <div v-else class="home">
+      <div class="restaurant-list">
+        <router-link
+          v-for="restaurant in restaurants"
+          :key="restaurant?.info?.id"
+          class="res-list"
+          :to="'/restaurant/' + restaurant?.info?.id"
+        >
+          <RestaurantCard :restaurant="restaurant?.info" />
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Shimmer from "@/views/Shimmer.vue";
 import RestaurantCard from "./RestaurantCard.vue";
 
 export default {
   name: "Home",
   components: {
     RestaurantCard,
+    Shimmer,
   },
   data() {
     return {
-      restaurants: null,
+      restaurants: [],
     };
   },
 
